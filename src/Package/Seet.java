@@ -7,6 +7,7 @@ public class Seet<T> {
 		set = new ArrayList<T>();
 	}
 	Seet(ArrayList<T> ini){
+		set = new ArrayList<T>();
 		for(int i = 0; i < ini.size(); i++) {
 			if(hash_set.contains(ini.get(i))) {
 				continue;
