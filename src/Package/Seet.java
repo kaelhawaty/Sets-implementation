@@ -1,14 +1,26 @@
 package Package;
 import java.util.*;
-// hello
-public class Seet {
-	private Set<String> hash_set = new HashSet<String>();
-	private ArrayList<String> set;
-	Seet(ArrayList<String> initial){
+public class Seet<T> {
+	private Set<T> hash_set = new HashSet<T>();
+	private ArrayList<T> set;
+	Seet(){
+		set = new ArrayList<T>();
+	}
+	Seet(ArrayList<T> initial){
 		set = initial;
 		for(int i = 0; i < set.size(); i++) {
 			hash_set.add(set.get(i));
 		}
+	}
+	public void add(T ob) {
+		set.add(ob);
+		hash_set.add(ob);
+	}
+	public int getSize() {
+		return set.size();
+	}
+	public T getIndex(int ind) {
+		return set.get(ind);
 	}
 	public void print() {
 		System.out.print("{");
@@ -17,7 +29,40 @@ public class Seet {
 		}
 		System.out.print("}");	
 	}
-	public boolean exist(String s) {
+	public boolean exist(T s) {
 		return hash_set.contains(s);
 	}
+	public Seet<T> union(Seet<T> a){
+		Seet<T> s = new Seet<T>();
+		for(int i = 0; i < this.getSize(); i++) {
+			s.add(this.getIndex(i));
+		}
+		for(int i = 0; i < a.getSize(); i++) {
+			if(this.exist(a.getIndex(i))){
+				continue;
+			}
+			s.add(a.getIndex(i));
+		}
+		return s;
+	}
+	public Seet<T> intersection(Seet<T> a){
+		Seet<T> s = new Seet<T>();
+		for(int i = 0; i < this.getSize(); i++) {
+			if(a.exist(this.getIndex(i))) {
+				s.add(this.getIndex(i));
+			}
+		}
+		return s;
+	}
+	public Seet<T> complement(Seet<T> universe){
+		Seet<T> s = new Seet<T>();
+		for(int i = 0; i < universe.getSize(); i++) {
+			if(!this.exist(universe.getIndex(i))) {
+				s.add(universe.getIndex(i));
+			}
+		}
+		return s;
+		
+	}
+	
 }
