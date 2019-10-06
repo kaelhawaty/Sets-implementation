@@ -1,20 +1,25 @@
 package Package;
 import java.util.*;
 public class Seet<T> {
-	private Set<T> hash_set = new HashSet<T>();
+	private HashSet<T> hash_set = new HashSet<T>();
 	private ArrayList<T> set;
 	Seet(){
 		set = new ArrayList<T>();
 	}
-	Seet(ArrayList<T> initial){
-		set = initial;
-		for(int i = 0; i < set.size(); i++) {
-			hash_set.add(set.get(i));
+	Seet(ArrayList<T> ini){
+		for(int i = 0; i < ini.size(); i++) {
+			if(hash_set.contains(ini.get(i))) {
+				continue;
+			}
+			hash_set.add(ini.get(i));
+			set.add(ini.get(i));
 		}
 	}
 	public void add(T ob) {
-		set.add(ob);
-		hash_set.add(ob);
+		if(!hash_set.contains(ob)) {
+			set.add(ob);
+			hash_set.add(ob);
+		}
 	}
 	public int getSize() {
 		return set.size();
