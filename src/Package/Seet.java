@@ -31,9 +31,13 @@ public class Seet<T> {
 	public void print() {
 		System.out.print("{");
 		for(int i = 0; i < set.size(); i++) {
-			System.out.print(set.get(i) + " ");
+			if (i == set.size()-1)
+				System.out.print(set.get(i));
+			else
+				System.out.print(set.get(i) + ", ");
 		}
 		System.out.print("}");	
+		System.out.println();
 	}
 	public boolean exist(T s) {
 		return hash_set.contains(s);
@@ -68,7 +72,6 @@ public class Seet<T> {
 			}
 		}
 		return s;
-		
 	}
 	
 }
